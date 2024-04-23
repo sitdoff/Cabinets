@@ -30,7 +30,6 @@ class UserModelManager(UserManager):
     def create_user(self, username=None, email=None, password=None, **extra_fields):
         if username is None and not email is None:
             username = email
-        # return super()._create_user(username, email, password, **extra_fields)
         return super().create_user(username, email, password, **extra_fields)
 
     def create_superuser(self, username=None, email=None, password=None, **extra_fields):
