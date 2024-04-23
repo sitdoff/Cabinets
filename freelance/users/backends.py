@@ -6,6 +6,10 @@ UserModel = get_user_model()
 
 
 class EmailUsernameAuthenticationBackend(ModelBackend):
+    """
+    Allows you to authenticate using email.
+    """
+
     def authenticate(self, request, username=None, password=None, **kwargs):
         if username is None:
             username = kwargs.get(UserModel.USERNAME_FIELD, kwargs.get(UserModel.EMAIL_FIELD))

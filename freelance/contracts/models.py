@@ -5,10 +5,18 @@ from users.models import UserModel
 
 
 class Category(models.Model):
+    """
+    Category model.
+    """
+
     name = models.CharField(max_length=30, verbose_name="Category")
 
 
 class ContractModel(models.Model):
+    """
+    Contract model
+    """
+
     value = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Contract value")
     information = models.TextField(verbose_name="Contract information")
     cathegory = models.ForeignKey(

@@ -25,6 +25,10 @@ def profile_user_path(instance: "UserModel", filename: str) -> str:
 
 
 class UserModelManager(UserManager):
+    """
+    When creating a user and superuser, the username value is replaced by email.
+    """
+
     use_in_migrations = True
 
     def create_user(self, username=None, email=None, password=None, **extra_fields):
@@ -39,6 +43,9 @@ class UserModelManager(UserManager):
 
 
 class UserModel(AbstractUser):
+    """
+    A user model prepared for authentication using email.
+    """
 
     username_validator = UnicodeUsernameValidator()
 
@@ -64,6 +71,9 @@ class UserModel(AbstractUser):
     objects = UserModelManager()
 
     def save(self, *args, **kwargs):
+        """
+        When you create a user, a profile is created.
+        """
         created = not self.pk
         super().save(*args, **kwargs)
         if created:
@@ -71,6 +81,10 @@ class UserModel(AbstractUser):
 
 
 class UserProfile(models.Model):
+    """
+    User profile model.
+    """
+
     name = models.CharField(verbose_name="Name", max_length=100, blank=True)
     information = models.TextField(verbose_name="Information", blank=True)
     photo = models.ImageField(verbose_name="Profile image", upload_to=profile_user_path, blank=True)

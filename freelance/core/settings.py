@@ -17,6 +17,7 @@ import django_stubs_ext
 from dotenv import load_dotenv
 
 load_dotenv()
+# TODO delete this
 django_stubs_ext.monkeypatch()
 
 
@@ -35,6 +36,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# TODO delete this
 if DEBUG:
     import socket  # only if you haven't already imported this
 
