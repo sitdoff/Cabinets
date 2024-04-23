@@ -19,8 +19,4 @@ class EmailUsernameAuthenticationBackend(ModelBackend):
             UserModel().set_password(password)
         else:
             if user.check_password(password) and self.user_can_authenticate(user):
-                print(user.pk)
-                print(user.email)
-                print(user.password)
-                print(UserModel)
                 return user
