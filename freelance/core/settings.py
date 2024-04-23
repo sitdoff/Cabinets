@@ -145,3 +145,6 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 AUTH_USER_MODEL = "users.UserModel"
+AUTHENTICATION_BACKENDS = [
+    "users.backends.EmailUsernameAuthenticationBackend",
+]

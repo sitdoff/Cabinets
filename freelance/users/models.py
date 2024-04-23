@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager, UserManager
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 
@@ -30,22 +30,13 @@ class UserModelManager(UserManager):
     def create_user(self, username=None, email=None, password=None, **extra_fields):
         if username is None and not email is None:
             username = email
-        extra_fields.setdefault("is_staff", False)
-        extra_fields.setdefault("is_superuser", False)
-        return self._create_user(username, email, password, **extra_fields)
+        # return super()._create_user(username, email, password, **extra_fields)
+        return super().create_user(username, email, password, **extra_fields)
 
     def create_superuser(self, username=None, email=None, password=None, **extra_fields):
         if username is None and not email is None:
             username = email
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-
-        if extra_fields.get("is_staff") is not True:
-            raise ValueError("Superuser must have is_staff=True.")
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError("Superuser must have is_superuser=True.")
-
-        return self._create_user(username, email, password, **extra_fields)
+        return super().create_superuser(username, email, password, **extra_fields)
 
 
 class UserModel(AbstractUser):
@@ -55,7 +46,7 @@ class UserModel(AbstractUser):
     username = models.CharField(
         verbose_name="username",
         max_length=150,
-        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+        help_text="Not required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
         validators=[username_validator],
         error_messages={
             "unique": "A user with that username already exists.",
