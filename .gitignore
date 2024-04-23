@@ -23,3 +23,6 @@ todo.txt
 .prettierrc.toml
 .pylintrc.bak
 migrations/
+/startbootstrap*
+freelance/contracts/migrations
+freelance/users/migrations
