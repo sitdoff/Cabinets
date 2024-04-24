@@ -1,21 +1,7 @@
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
-
-from .services import profile_user_path
-
-# class CustomerProfileModel(models.Model):
-#     pass
-# количество размещенных заказов
-# сумма размещенных заказов
-# количество активных заказов
-
-
-# class PerformerProfileModel(models.Model):
-#     pass
-# количество выполненных заказов
-# сумма выполненных заказов
-# количество заказов в работе
+from user_profile.models import UserProfileModel
 
 
 class UserModelManager(UserManager):
@@ -41,7 +27,7 @@ class UserModel(AbstractUser):
     A user model prepared for authentication using email.
     """
 
-    profile: "UserProfile"
+    profile: "UserProfileModel"
 
     username_validator = UnicodeUsernameValidator()
 
@@ -73,19 +59,4 @@ class UserModel(AbstractUser):
         created = not self.pk
         super().save(*args, **kwargs)
         if created:
-            UserProfile.objects.create(user=self)
-
-
-class UserProfile(models.Model):
-    """
-    User profile model.
-    """
-
-    name = models.CharField(verbose_name="Name", max_length=100, blank=True)
-    information = models.TextField(verbose_name="Information", blank=True)
-    photo = models.ImageField(verbose_name="Profile image", upload_to=profile_user_path, blank=True)
-    phone = models.CharField(verbose_name="Phone number", max_length=12, blank=True)
-    user = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name="profile", verbose_name="Profile")
-    # customer_profile
-    # performer_profile
-    # reviews =
+            UserProfileModel.objects.create(user=self)

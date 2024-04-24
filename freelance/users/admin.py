@@ -1,12 +1,10 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 
 from .models import UserModel
 
 
 # Register your models here.
 class UserModelAdmin(admin.ModelAdmin):
-    pass
     search_fields = ("email", "username")
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
     fieldsets = (

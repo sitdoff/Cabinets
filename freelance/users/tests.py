@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .models import UserModel, UserProfile
+from .models import UserModel, UserProfileModel
 from .services import profile_user_path
 
 
@@ -61,8 +61,8 @@ class TestUserModel(TestCase):
             "password": "password",
         }
         user = UserModel.objects.create_user(**data)
-        self.assertIsInstance(user.profile, UserProfile)
-        profile = UserProfile.objects.get(user=user)
+        self.assertIsInstance(user.profile, UserProfileModel)
+        profile = UserProfileModel.objects.get(user=user)
         self.assertEqual(user.profile, profile)
         self.assertEqual(profile.user, user)
 
