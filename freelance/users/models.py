@@ -2,13 +2,7 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 
-
-def profile_user_path(instance: "UserModel", filename: str) -> str:
-    """
-    Returns the path to the user profile folder for storing images
-    """
-    return f"profile/{instance.username}/"
-
+from .services import profile_user_path
 
 # class CustomerProfileModel(models.Model):
 #     pass
@@ -46,6 +40,8 @@ class UserModel(AbstractUser):
     """
     A user model prepared for authentication using email.
     """
+
+    profile: "UserProfile"
 
     username_validator = UnicodeUsernameValidator()
 
