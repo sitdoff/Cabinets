@@ -4,12 +4,18 @@ from users.models import UserModel
 # Create your models here.
 
 
-class Category(models.Model):
+class CategoryModel(models.Model):
     """
     Category model.
     """
 
     name = models.CharField(max_length=30, verbose_name="Category")
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+    def __str__(self) -> str:
+        return f'Категория "{self.name}"'
 
 
 class ContractModel(models.Model):
@@ -18,9 +24,10 @@ class ContractModel(models.Model):
     """
 
     value = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Contract value")
+    title = models.CharField(max_length=100, verbose_name="Contract title")
     information = models.TextField(verbose_name="Contract information")
     cathegory = models.ForeignKey(
-        Category,
+        CategoryModel,
         on_delete=models.CASCADE,
         related_name="contracts",
         verbose_name="Category",
@@ -42,3 +49,10 @@ class ContractModel(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date of creation")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Date of update")
+    comleted = models.BooleanField(default=False, verbose_name="Выполнен")
+
+    class Meta:
+        verbose_name_plural = "Contracts"
+
+    def __str__(self) -> str:
+        return self.title
