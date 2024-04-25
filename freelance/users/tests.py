@@ -1,5 +1,7 @@
 from django.test import TestCase
+from django.urls import reverse
 
+from .forms import UserRegisterationForm
 from .models import UserModel, UserProfileModel
 from .services import profile_user_path
 
@@ -89,3 +91,39 @@ class TestEmailUsernameAuthenticationBackend(TestCase):
 
         user = authenticate(email=self.data["email"], password=self.data["password"])
         self.assertIsNotNone(user)
+
+
+class TestUserRegisterView(TestCase):
+    """
+    Test registration view
+    """
+
+    def test_registration_get(self):
+        """
+        Test GET method
+        """
+        response = self.client.get(reverse("registration"))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("form", response.context)
+        self.assertIsInstance(response.context["form"], UserRegisterationForm)
+        self.assertTemplateUsed(response, "registration/registration.html")
+
+    def test_registration_post(self):
+        """
+        Test POST method
+        """
+        data = {
+            "email": "user@mail.com",
+            "password1": "VERY_STRONG_PASSWORD",
+            "password2": "VERY_STRONG_PASSWORD",
+        }
+        with self.assertRaises(UserModel.DoesNotExist):
+            user = UserModel.objects.get(email=data["email"])
+
+        response = self.client.post(reverse("registration"), data=data)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("profile"))
+
+        user = UserModel.objects.get(email=data["email"])
+        self.assertEqual(user.email, data["email"])
+        self.assertTrue(user.check_password(data["password1"]))
