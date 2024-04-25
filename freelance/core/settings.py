@@ -38,12 +38,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # TODO delete this
-if DEBUG:
-    import socket  # only if you haven't already imported this
-
-    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-    INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
-
+INTERNAL_IPS = ["127.0.0.1"]
+# if DEBUG:
+#     import socket  # only if you haven't already imported this
+#
+#     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+#     INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+#
 
 # Application definition
 
