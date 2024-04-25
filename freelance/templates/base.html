@@ -49,21 +49,27 @@
                                data-bs-toggle="dropdown"
                                aria-expanded="false">{{ request.user }}</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'registration' %}">Registration</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-                                </li>
-                                <li>
-                                    <form method="post" action="{% url 'logout' %}?next=/accounts/login/">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-link dropdown-item">Logout</button>
-                                    </form>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
+                                {% if user.is_authenticated %}
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li>
+                                        <form method="post" action="{% url 'logout' %}?next=/accounts/login/">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-link dropdown-item">Logout</button>
+                                        </form>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'registration' %}">Registration</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                {% endif %}
                                 <!-- <li> -->
                                 <!--     <a class="dropdown-item" href="#!">Popular Items</a> -->
                                 <!-- </li> -->
