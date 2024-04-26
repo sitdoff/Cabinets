@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from users.models import UserModel
 
 # Create your models here.
@@ -56,3 +57,6 @@ class ContractModel(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("contract_detail", kwargs={"pk": self.pk})
