@@ -54,8 +54,16 @@ class UserProfileModel(models.Model):
         return self.user.placed_contracts.filter(completed=False)
 
 
-# class CustomerProfileModel(models.Model):
-#     pass
+class CustomerProfileModel(UserProfileModel):
+    class Meta:
+        proxy = True
+
+    def get_contracts_created(self):
+        queryset = self.user.placed_contracts.all()
+        objects_pairs = zip(queryset[::2], queryset[1::2])
+        return objects_pairs
+
+
 # количество размещенных заказов
 # сумма размещенных заказов
 # количество активных заказов
