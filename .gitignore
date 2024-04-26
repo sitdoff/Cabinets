@@ -26,3 +26,4 @@ migrations/
 /startbootstrap*
 freelance/contracts/migrations
 freelance/users/migrations
+freelance/media/
