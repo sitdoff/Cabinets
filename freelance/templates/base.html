@@ -51,10 +51,10 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {% if user.is_authenticated %}
                                     <li>
-                                        <a class="dropdown-item" href="">Кабинет заказчика</a>
+                                        <a class="dropdown-item" href="{% url 'customer_office' %}">Кабинет заказчика</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="">Кабинет продавца</a>
+                                        <a class="dropdown-item" href="">Кабинет исполнителя</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider" />
