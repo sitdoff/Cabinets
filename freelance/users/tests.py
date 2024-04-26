@@ -18,8 +18,8 @@ class TestFunctionProfileUserPath(TestCase):
             "password": "password",
         }
         user = UserModel.objects.create_user(**data)
-        result = profile_user_path(user)
-        self.assertEqual(result, f"profile/{user.username}/")
+        result = profile_user_path(user.profile, "file.jpg")
+        self.assertEqual(result, f"profile_pictures/{user.pk}/file.jpg")
 
 
 class TestUserModel(TestCase):
