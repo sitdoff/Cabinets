@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
+from django.urls import reverse
 from user_profile.models import UserProfileModel
 
 
@@ -51,6 +52,9 @@ class UserModel(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserModelManager()
+
+    def get_absolute_url(self):
+        return reverse("profile_view", kwargs={"user_id": self.pk})
 
     def save(self, *args, **kwargs):
         """
