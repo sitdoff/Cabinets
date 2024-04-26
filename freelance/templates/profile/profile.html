@@ -61,11 +61,11 @@
                             <div class="card-header">Completed contracts in categories</div>
                             <div class="card-body">
                                 <div class="row">
-                                    {% for category_pk, category_name in categories_performed %}
+                                    {% for category_pk, category_name, contract_count in categories_performed %}
                                         <div class="col-sm-6">
                                             <ul class="list-unstyled mb-0">
                                                 <li>
-                                                    <a href="{{ category_pk }}">{{ category_name }}</a>
+                                                    <a href="{{ category_pk }}">{{ category_name }} ({{ contract_count }})</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -87,11 +87,11 @@
                             <div class="card-header">Created contracts in categories</div>
                             <div class="card-body">
                                 <div class="row">
-                                    {% for category_pk, category_name in categories_created %}
+                                    {% for category_pk, category_name, contract_count in categories_created %}
                                         <div class="col-sm-6">
                                             <ul class="list-unstyled mb-0">
                                                 <li>
-                                                    <a href="{{ category_pk }}">{{ category_name }}</a>
+                                                    <a href="{{ category_pk }}">{{ category_name }} ({{ contract_count }})</a>
                                                 </li>
                                             </ul>
                                         </div>
