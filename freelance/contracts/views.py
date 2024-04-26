@@ -8,7 +8,7 @@ from .models import ContractModel
 
 
 class Index(ListView):
-    queryset = ContractModel.objects.all()
+    queryset = ContractModel.objects.filter(performer=None, completed=False)
     template_name = "index.html"
     context_object_name = "contract_list"
 

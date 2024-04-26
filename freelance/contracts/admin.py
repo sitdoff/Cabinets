@@ -9,7 +9,7 @@ class CategoryModelAdmin(admin.ModelAdmin):
 
 
 class ContractModelAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["title", "value", "completed", "customer"]
 
 
 admin.site.register(CategoryModel, CategoryModelAdmin)
