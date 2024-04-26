@@ -37,14 +37,17 @@ class UserProfileModel(models.Model):
     def get_categories_performed(self):
         return (
             self.user.completed_contracts.all()
-            .select_related()
             .values_list("category__pk", "category__name")
+            .annotate(performed_contracts=models.Count("category__contracts__performer" == self.user))
             .distinct()
         )
 
     def get_categories_created(self):
         return (
-            self.user.placed_contracts.all().select_related().values_list("category__pk", "category__name").distinct()
+            self.user.placed_contracts.all()
+            .values_list("category__pk", "category__name")
+            .annotate(performed_contracts=models.Count("category__contracts__customer" == self.user))
+            .distinct()
         )
 
     def get_placed_contracts(self):
