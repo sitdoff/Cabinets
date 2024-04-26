@@ -10839,3 +10839,8 @@ textarea.form-control-lg {
     background-color: #000 !important;
     color: #fff;
 }
+
+.card-img-profile {
+  width: 60%;
+align-items: center;
+}
