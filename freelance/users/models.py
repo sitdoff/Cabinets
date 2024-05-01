@@ -1,8 +1,8 @@
+from django.apps import apps
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.urls import reverse
-from user_profile.models import UserProfileModel
 
 
 class UserModelManager(UserManager):
@@ -28,7 +28,7 @@ class UserModel(AbstractUser):
     A user model prepared for authentication using email.
     """
 
-    profile: "UserProfileModel"
+    profile: "user_profile.models.UserProfileModel"
 
     username_validator = UnicodeUsernameValidator()
 
@@ -63,4 +63,4 @@ class UserModel(AbstractUser):
         created = not self.pk
         super().save(*args, **kwargs)
         if created:
-            UserProfileModel.objects.create(user=self)
+            apps.get_model("user_profile", "UserProfileModel").objects.create(user=self)

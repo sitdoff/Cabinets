@@ -1,4 +1,6 @@
+from contracts.models import ContractModel
 from django.db import models
+from django.db.models import Q
 from offer.models import OfferModel
 from PIL import Image
 from users.services import profile_user_path
@@ -86,6 +88,10 @@ class CustomerProfileModel(UserProfileModel):
         )
         return offers
 
+    def get_placed_contracts(self):
+        queryset = super().get_placed_contracts().filter(completed=False).order_by("created_at")
+        return queryset
+
 
 # количество размещенных заказов
 # сумма размещенных заказов
@@ -112,6 +118,10 @@ class PerformerProfileModel(UserProfileModel):
             .filter(offering=self.user)
         )
         return offers
+
+    def get_completed_contracts(self):
+        queryset = ContractModel.objects.select_related("category").filter(Q(performer=self.user) & Q(completed=True))
+        return queryset
 
 
 # количество выполненных заказов

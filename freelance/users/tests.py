@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
+from user_profile.models import UserProfileModel
 
 from .forms import UserRegisterationForm
-from .models import UserModel, UserProfileModel
+from .models import UserModel
 from .services import profile_user_path
 
 
