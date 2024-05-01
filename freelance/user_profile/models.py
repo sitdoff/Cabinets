@@ -36,6 +36,9 @@ class UserProfileModel(models.Model):
             img.save(self.photo.path)
 
     def get_categories_performed(self):
+        """
+        Returns the categories in which the user completed contracts.
+        """
         return (
             self.user.completed_contracts.all()
             .values_list("category__pk", "category__name")
@@ -44,6 +47,9 @@ class UserProfileModel(models.Model):
         )
 
     def get_categories_created(self):
+        """
+        Returns the categories in which the user created contracts.
+        """
         return (
             self.user.placed_contracts.all()
             .values_list("category__pk", "category__name")
@@ -52,10 +58,19 @@ class UserProfileModel(models.Model):
         )
 
     def get_placed_contracts(self):
+        """
+        Returns the created contracts.
+        """
         return self.user.placed_contracts.filter(completed=False)
 
 
 class CustomerProfileModel(UserProfileModel):
+    """
+    Contract creator profile model.
+
+    Proxy model.
+    """
+
     class Meta:
         proxy = True
 
@@ -78,6 +93,12 @@ class CustomerProfileModel(UserProfileModel):
 
 
 class PerformerProfileModel(UserProfileModel):
+    """
+    Contract performer profile model.
+
+    Proxy model.
+    """
+
     class Meta:
         proxy = True
 
@@ -89,7 +110,6 @@ class PerformerProfileModel(UserProfileModel):
             OfferModel.objects.select_related("offering")
             .prefetch_related("contract", "contract__customer")
             .filter(offering=self.user)
-            .distinct()
         )
         return offers
 

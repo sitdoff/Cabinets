@@ -4,6 +4,10 @@ from .models import OfferModel
 
 
 class CreateOfferForm(ModelForm):
+    """
+    Create offer form
+    """
+
     class Meta:
         model = OfferModel
         fields = ("message",)

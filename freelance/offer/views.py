@@ -9,6 +9,9 @@ from .models import OfferModel
 
 # Create your views here.
 def cretae_offer(request: HttpRequest, contract_id: int) -> HttpResponse:
+    """
+    Create offer view
+    """
     if request.method == "POST":
         form = CreateOfferForm(request.POST)
         contract = get_object_or_404(ContractModel, pk=contract_id)

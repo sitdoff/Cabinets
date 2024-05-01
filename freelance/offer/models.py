@@ -3,6 +3,10 @@ from django.db import models
 
 # Create your models here.
 class OfferModel(models.Model):
+    """
+    Offer model
+    """
+
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     offering = models.ForeignKey("users.UserModel", on_delete=models.CASCADE, related_name="user_offers")
     contract = models.ForeignKey("contracts.ContractModel", on_delete=models.CASCADE, related_name="contract_offers")
