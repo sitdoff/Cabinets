@@ -26,6 +26,7 @@ urlpatterns = [
     path("profile/", include("user_profile.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/", include("users.urls")),
+    path("offer/", include("offer.urls")),
 ]
 
 # TODO delete this
