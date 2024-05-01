@@ -42,7 +42,7 @@ class UserProfileModel(models.Model):
         Returns the categories in which the user completed contracts.
         """
         return (
-            self.user.completed_contracts.all()
+            self.user.completed_contracts.filter(completed=True)
             .values_list("category__pk", "category__name")
             .annotate(performed_contracts=models.Count("category__contracts__performer" == self.user))
             .distinct()
@@ -120,7 +120,11 @@ class PerformerProfileModel(UserProfileModel):
         return offers
 
     def get_completed_contracts(self):
-        queryset = ContractModel.objects.select_related("category").filter(Q(performer=self.user) & Q(completed=True))
+        queryset = ContractModel.objects.select_related("category").filter(performer=self.user).filter(completed=True)
+        return queryset
+
+    def get_uncompleted_contracts(self):
+        queryset = ContractModel.objects.select_related("category").filter(performer=self.user, completed=False)
         return queryset
 
 

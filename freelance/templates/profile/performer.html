@@ -95,6 +95,31 @@
                         </div>
                     {% endif %}
                 {% endwith %}
+                <!-- Unfulfilled contracts -->
+                {% with profile.get_uncompleted_contracts as uncompleted_contracts %}
+                    {% if uncompleted_contracts %}
+                        <!-- Completed contracts in categories widget-->
+                        <div class="card mb-4">
+                            <div class="card-header">Незавершенные контракты</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    {% for contract in uncompleted_contracts %}
+                                        <div class="col-sm-12">
+                                            <ul class="list-unstyled mb-0">
+                                                <li>{{ contract.title }} - ${{ contract.value }}</li>
+                                            </ul>
+                                        </div>
+                                    {% empty %}
+                                    {% endfor %}
+                                    <div class="col-sm-6">
+                                        <ul class="list-unstyled mb-0">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 <!-- Completed contracts -->
                 {% with profile.get_completed_contracts as completed_contracts %}
                     {% if completed_contracts %}

@@ -9,7 +9,7 @@ class CategoryModelAdmin(admin.ModelAdmin):
 
 
 class ContractModelAdmin(admin.ModelAdmin):
-    list_display = ["title", "value", "completed", "customer"]
+    list_display = ["title", "value", "customer", "performer", "completed"]
 
 
 admin.site.register(CategoryModel, CategoryModelAdmin)
