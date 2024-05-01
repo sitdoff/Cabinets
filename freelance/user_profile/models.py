@@ -1,4 +1,5 @@
 from django.db import models
+from offer.models import OfferModel
 from PIL import Image
 from users.services import profile_user_path
 
@@ -58,10 +59,17 @@ class CustomerProfileModel(UserProfileModel):
     class Meta:
         proxy = True
 
-    def get_contracts_created(self):
-        queryset = self.user.placed_contracts.all()
-        objects_pairs = zip(queryset[::2], queryset[1::2])
-        return objects_pairs
+    def get_offers(self):
+        """
+        Returns offers for all outstanding contracts.
+        """
+        offers = (
+            OfferModel.objects.select_related("offering")
+            .prefetch_related("contract")
+            .filter(contract__customer=self.user)
+            .order_by("-created_at")
+        )
+        return offers
 
 
 # количество размещенных заказов

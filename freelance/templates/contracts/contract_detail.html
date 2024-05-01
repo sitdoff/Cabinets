@@ -15,10 +15,16 @@
                         <span>${{ contract.value }}</span>
                     </div>
                     <p class="lead">{{ contract.information }}</p>
-                    <div class="d-flex">
-                        <a href="{% url "offer_create" contract.pk %}"
-                           class="btn btn-outline-dark flex-shrink-0">Предложить услуги</a>
-                    </div>
+                    {% if contract.customer != request.user %}
+                        <div class="d-flex">
+                            <a href="{% url "offer_create" contract.pk %}"
+                               class="btn btn-outline-dark flex-shrink-0">Предложить услуги</a>
+                        </div>
+                    {% else %}
+                        <div class="d-flex">
+                            <p>Вы не можете выслать предложение на свой контракт</p>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

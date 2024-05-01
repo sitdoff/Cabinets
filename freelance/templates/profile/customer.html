@@ -6,31 +6,20 @@
         <div class="row">
             <div class="col-lg-8">
                 <br />
-                <h2>Вы разместили следующие контракты:</h2>
+                <h2>Отклики на ваши контракты:</h2>
                 <br />
-                {% for contract1, contract2 in profile.get_contracts_created %}
+                {% for offer in profile.get_offers %}
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <!-- Blog post-->
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <div class="small text-muted">{{ contract1.created_at|date:"d F Y" }}</div>
-                                    <h2 class="card-title h4">{{ contract1.title }}</h2>
-                                    ${{ contract1.value }}
-                                    <p class="card-text">{{ contract1.information }}</p>
-                                    <a class="btn btn-primary" href="{{ contract1.get_absolute_url }}">Read more →</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="small text-muted">{{ contract2.created_at|date:"d F Y" }}</div>
-                                    <h2 class="card-title h4">{{ contract2.title }}</h2>
-                                    ${{ contract2.value }}
-                                    <p class="card-text">{{ contract2.information }}</p>
-                                    <a class="btn btn-primary" href="{{ contract2.get_absolute_url }}">Read more →</a>
+                                    <div class="small text-muted">{{ offer.created_at|date:"d F Y H:i" }}</div>
+                                    <h2 class="card-title h4">{{ offer.contract.title }}</h2>
+                                    <p class="card-text">{{ offer.message|default:"Предлагает свои услуги" }}</p>
+                                    <p class="card-text">
+                                        <a href="{% url 'profile_view' offer.offering.pk %}">{{ offer.offering }}</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
