@@ -10,22 +10,37 @@ from .models import ContractModel
 
 
 class Index(ListView):
+    """
+    Main page view
+    """
+
     queryset = ContractModel.objects.filter(performer=None, completed=False)
     template_name = "index.html"
     context_object_name = "contract_list"
 
 
 class ContractDetailView(DetailView):
+    """
+    Contract detail view
+    """
+
     model = ContractModel
     template_name = "contracts/contract_detail.html"
     context_object_name = "contract"
 
 
 class CreateContractView(CreateView):
+    """
+    Create contract view
+    """
+
     model = ContractModel
     form_class = ContractCreateModelForm
     template_name = "contracts/contract_create.html"
 
     def form_valid(self, form):
+        """
+        Set contract customer
+        """
         form.instance.customer = self.request.user
         return super().form_valid(form)
