@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <br />
-                <h2>Отклики на ваши контракты:</h2>
+                <h2>Вы откликались на следующие контракты:</h2>
                 <br />
                 {% for offer in profile.get_offers %}
                     <div class="row">
@@ -16,16 +16,19 @@
                                 <div class="card-body">
                                     <div class="small text-muted">{{ offer.created_at|date:"d F Y H:i" }}</div>
                                     <h2 class="card-title h4">{{ offer.contract.title }}</h2>
-                                    <p class="card-text">{{ offer.message|default:"Предлагает свои услуги" }}</p>
                                     <p class="card-text">
-                                        <a href="{% url 'profile_view' offer.offering.pk %}">{{ offer.offering.profile.name|default:offer.offering }}</a>
+                                        Контракт разместил <a href="{% url 'profile_view' offer.contract.customer.pk %}">{{ offer.contract.customer.profile.name|default:offer.contract.customer }}</a>
+                                    </p>
+                                    <p>
+                                        <b>Ваше сообщение:</b>
+                                    </p>
+                                    <p class="card-text">
+                                        <i>{{ offer.message|default:"Предлагает свои услуги" }}</i>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% empty %}
-                    <h4>Еще никто не откликнулся на ваши контракты</h4>
                 {% endfor %}
                 <!-- Pagination-->
                 <!-- <nav aria-label="Pagination"> -->

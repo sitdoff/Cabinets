@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from .models import CustomerProfileModel, UserProfileModel
+from .models import CustomerProfileModel, PerformerProfileModel, UserProfileModel
 
 
 # Create your views here.
@@ -15,6 +15,11 @@ def profile(request: HttpRequest, user_id=None):
     return render(request, "profile/profile.html", context={"profile": profile})
 
 
-def customer_office(request: HttpRequest):
+def customer_office(request: HttpRequest) -> HttpResponse:
     profile = CustomerProfileModel.objects.select_related().get(user=request.user.pk)
     return render(request, "profile/customer.html", context={"profile": profile})
+
+
+def performer_office(request: HttpRequest) -> HttpResponse:
+    profile = PerformerProfileModel.objects.select_related().get(user=request.user.pk)
+    return render(request, "profile/performer.html", context={"profile": profile})

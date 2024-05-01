@@ -64,7 +64,7 @@ class CustomerProfileModel(UserProfileModel):
         Returns offers for all outstanding contracts.
         """
         offers = (
-            OfferModel.objects.select_related("offering")
+            OfferModel.objects.select_related("offering", "offering__profile")
             .prefetch_related("contract")
             .filter(contract__customer=self.user)
             .order_by("-created_at")
@@ -77,8 +77,23 @@ class CustomerProfileModel(UserProfileModel):
 # количество активных заказов
 
 
-# class PerformerProfileModel(models.Model):
-#     pass
+class PerformerProfileModel(UserProfileModel):
+    class Meta:
+        proxy = True
+
+    def get_offers(self):
+        """
+        Returns all offers submitted by the user
+        """
+        offers = (
+            OfferModel.objects.select_related("offering")
+            .prefetch_related("contract", "contract__customer")
+            .filter(offering=self.user)
+            .distinct()
+        )
+        return offers
+
+
 # количество выполненных заказов
 # сумма выполненных заказов
 # количество заказов в работе
