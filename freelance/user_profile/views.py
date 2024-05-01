@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import UpdateView
 
 from .models import CustomerProfileModel, PerformerProfileModel, UserProfileModel
 
@@ -23,3 +25,13 @@ def customer_office(request: HttpRequest) -> HttpResponse:
 def performer_office(request: HttpRequest) -> HttpResponse:
     profile = PerformerProfileModel.objects.select_related().get(user=request.user.pk)
     return render(request, "profile/performer.html", context={"profile": profile})
+
+
+class ProfileEdit(UpdateView):
+    model = UserProfileModel
+    template_name = "profile/profile_edit.html"
+    fields = ("name", "information", "photo", "phone")
+    success_url = reverse_lazy("profile")
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile

@@ -46,14 +46,16 @@
             <!-- Side widgets-->
             <div class="col-lg-4">
                 <!-- Search widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Settings</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <button class="btn btn-primary" type="button">Edit profile</button>
+                {% if profile.user == request.user %}
+                    <div class="card mb-4">
+                        <div class="card-header">Settings</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <a href="{% url "profile_edit" %}" class="btn btn-primary">Редактировать профиль</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
                 {% with  profile.get_categories_performed as categories_performed %}
                     {% if categories_performed %}
                         <!-- Completed contracts in categories widget-->
