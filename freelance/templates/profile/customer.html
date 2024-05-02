@@ -92,7 +92,7 @@
                         </div>
                     {% endif %}
                 {% endwith %}
-                <!-- Side widget-->
+                <!-- Active contacts -->
                 <div class="card mb-4">
                     <div class="card-header">Список ваших активных контрактов</div>
                     <div class="card-body">
@@ -103,6 +103,15 @@
                                 </div>
                             </div>
                         {% endfor %}
+                    </div>
+                </div>
+                <!-- Total value -->
+                <div class="card mb-4">
+                    <div class="card-header">За месяц размещено контрактов на сумму</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">${{ profile.get_amount_for_month }}</div>
+                        </div>
                     </div>
                 </div>
             </div>

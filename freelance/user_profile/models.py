@@ -1,6 +1,8 @@
+from datetime import datetime
+
 from contracts.models import ContractModel
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Sum
 from offer.models import OfferModel
 from PIL import Image
 from users.services import profile_user_path
@@ -92,6 +94,20 @@ class CustomerProfileModel(UserProfileModel):
         queryset = super().get_placed_contracts().filter(completed=False).order_by("created_at")
         return queryset
 
+    def get_amount_for_month(self):
+        current_month = datetime.now().month
+        current_year = datetime.now().year
+
+        total_value = ContractModel.objects.filter(
+            created_at__month=current_month,
+            created_at__year=current_year,
+            customer=self.user,
+        ).aggregate(total=Sum("value"))["total"]
+        if total_value is None:
+            total_value = 0
+
+        return total_value
+
 
 # количество размещенных заказов
 # сумма размещенных заказов
@@ -126,6 +142,21 @@ class PerformerProfileModel(UserProfileModel):
     def get_uncompleted_contracts(self):
         queryset = ContractModel.objects.select_related("category").filter(performer=self.user, completed=False)
         return queryset
+
+    def get_amount_for_month(self):
+        current_month = datetime.now().month
+        current_year = datetime.now().year
+
+        total_value = ContractModel.objects.filter(
+            updated_at__month=current_month,
+            updated_at__year=current_year,
+            completed=True,
+            performer=self.user,
+        ).aggregate(total=Sum("value"))["total"]
+        if total_value is None:
+            total_value = 0
+
+        return total_value
 
 
 # количество выполненных заказов
