@@ -27,3 +27,4 @@ migrations/
 freelance/contracts/migrations
 freelance/users/migrations
 freelance/media/
+freelance/db.sqlite3.bak
