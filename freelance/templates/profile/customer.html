@@ -93,18 +93,22 @@
                     {% endif %}
                 {% endwith %}
                 <!-- Active contacts -->
-                <div class="card mb-4">
-                    <div class="card-header">Список ваших активных контрактов</div>
-                    <div class="card-body">
-                        {% for contract in profile.get_placed_contracts %}
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a href="{% url 'contract_detail' contract.pk %}">{{ contract.title }}</a>
-                                </div>
+                {% with profile.get_placed_contracts as placed_contracts %}
+                    {% if placed_contracts %}
+                        <div class="card mb-4">
+                            <div class="card-header">Список ваших активных контрактов</div>
+                            <div class="card-body">
+                                {% for contract in placed_contracts %}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <a href="{% url 'contract_detail' contract.pk %}">{{ contract.title }}</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 <!-- Total value -->
                 <div class="card mb-4">
                     <div class="card-header">За месяц размещено контрактов на сумму</div>

@@ -24,7 +24,7 @@
                     {% endif %}
                     <div class="card-body">
                         <div class="small text-muted">Registred: {{ profile.user.date_joined|date:"F Y" }}</div>
-                        <h2 class="card-title">{{ profile.name|default:profile.user.username }}</h2>
+                        <h2 class="card-title">{{ profile.name|default:profile.user.email }}</h2>
                         <p class="card-text">{{ profile.information|default:"Пользователь ничего о себе не рассказал." }}</p>
                         <!-- <a class="btn btn-primary" href="#!">Read more →</a> -->
                     </div>
@@ -60,15 +60,13 @@
                     {% if categories_performed %}
                         <!-- Completed contracts in categories widget-->
                         <div class="card mb-4">
-                            <div class="card-header">Completed contracts in categories</div>
+                            <div class="card-header">Выполнил контракты в категориях</div>
                             <div class="card-body">
                                 <div class="row">
                                     {% for category_pk, category_name, contract_count in categories_performed %}
                                         <div class="col-sm-6">
                                             <ul class="list-unstyled mb-0">
-                                                <li>
-                                                    <a href="{{ category_pk }}">{{ category_name }} ({{ contract_count }})</a>
-                                                </li>
+                                                <li>{{ category_name }} ({{ contract_count }})</li>
                                             </ul>
                                         </div>
                                     {% empty %}
@@ -86,15 +84,13 @@
                     {% if categories_created %}
                         <!-- Created contracts in categories widget-->
                         <div class="card mb-4">
-                            <div class="card-header">Created contracts in categories</div>
+                            <div class="card-header">Создал контракты в категориях</div>
                             <div class="card-body">
                                 <div class="row">
                                     {% for category_pk, category_name, contract_count in categories_created %}
                                         <div class="col-sm-6">
                                             <ul class="list-unstyled mb-0">
-                                                <li>
-                                                    <a href="{{ category_pk }}">{{ category_name }} ({{ contract_count }})</a>
-                                                </li>
+                                                <li>{{ category_name }} ({{ contract_count }})</li>
                                             </ul>
                                         </div>
                                     {% empty %}
@@ -111,7 +107,7 @@
                 <!-- Side widget-->
                 <div class="card mb-4">
                     <div class="card-header">Как со мной связаться</div>
-                    <div class="card-body">Данные для связи</div>
+                    <div class="card-body">{{ profile.contact|linebreaks }}</div>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@ def performer_office(request: HttpRequest) -> HttpResponse:
 class ProfileEdit(UpdateView):
     model = UserProfileModel
     template_name = "profile/profile_edit.html"
-    fields = ("name", "information", "photo", "phone")
+    fields = ("name", "information", "photo", "contact")
     success_url = reverse_lazy("profile")
 
     def get_object(self, queryset=None):

@@ -21,7 +21,7 @@ class UserProfileModel(models.Model):
         upload_to=profile_user_path,
         blank=True,
     )
-    phone = models.CharField(verbose_name="Phone number", max_length=12, blank=True)
+    contact = models.TextField(verbose_name="Ваши данные для связи", max_length=500, blank=True)
     user = models.OneToOneField(
         "users.UserModel", on_delete=models.CASCADE, related_name="profile", verbose_name="User"
     )
