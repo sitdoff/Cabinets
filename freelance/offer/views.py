@@ -1,4 +1,5 @@
 from contracts.models import ContractModel
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -8,6 +9,7 @@ from .models import OfferModel
 
 
 # Create your views here.
+@login_required
 def cretae_offer(request: HttpRequest, contract_id: int) -> HttpResponse:
     """
     Create offer view
