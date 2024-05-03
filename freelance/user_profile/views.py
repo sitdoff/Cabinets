@@ -1,13 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
 from .models import CustomerProfileModel, PerformerProfileModel, UserProfileModel
 
 
-# Create your views here.
 @login_required
 def profile(request: HttpRequest, user_id=None):
     if user_id is None:

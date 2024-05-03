@@ -2,13 +2,12 @@ from datetime import datetime
 
 from contracts.models import ContractModel
 from django.db import models
-from django.db.models import Q, Sum
+from django.db.models import Sum
 from offer.models import OfferModel
 from PIL import Image
 from users.services import profile_user_path
 
 
-# Create your models here.
 class UserProfileModel(models.Model):
     """
     User profile model.
@@ -25,9 +24,6 @@ class UserProfileModel(models.Model):
     user = models.OneToOneField(
         "users.UserModel", on_delete=models.CASCADE, related_name="profile", verbose_name="User"
     )
-    # customer_profile
-    # performer_profile
-    # reviews =
 
     def __str__(self) -> str:
         return f"{self.user} profile"
@@ -109,11 +105,6 @@ class CustomerProfileModel(UserProfileModel):
         return total_value
 
 
-# количество размещенных заказов
-# сумма размещенных заказов
-# количество активных заказов
-
-
 class PerformerProfileModel(UserProfileModel):
     """
     Contract performer profile model.
@@ -157,8 +148,3 @@ class PerformerProfileModel(UserProfileModel):
             total_value = 0
 
         return total_value
-
-
-# количество выполненных заказов
-# сумма выполненных заказов
-# количество заказов в работе

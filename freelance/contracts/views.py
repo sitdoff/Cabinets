@@ -1,12 +1,9 @@
-from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
 from .forms import ContractCreateModelForm
 from .models import ContractModel
-
-# Create your views here.
 
 
 class Index(ListView):

@@ -5,7 +5,6 @@ from django.shortcuts import redirect, render
 from .forms import UserRegisterationForm
 
 
-# Create your views here.
 def register(request: HttpRequest) -> HttpResponse:
     """
     User registration.

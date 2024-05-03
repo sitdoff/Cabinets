@@ -3,7 +3,6 @@ from django.contrib import admin
 from .models import UserModel
 
 
-# Register your models here.
 class UserModelAdmin(admin.ModelAdmin):
     search_fields = ("email", "username")
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")

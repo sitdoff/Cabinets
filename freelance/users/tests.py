@@ -7,7 +7,6 @@ from .models import UserModel
 from .services import profile_user_path
 
 
-# Create your tests here.
 class TestFunctionProfileUserPath(TestCase):
     """
     Test a function that returns the path to where the user's files are stored.

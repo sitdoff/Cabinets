@@ -3,7 +3,6 @@ from django.contrib import admin
 from .models import CategoryModel, ContractModel
 
 
-# Register your models here.
 class CategoryModelAdmin(admin.ModelAdmin):
     pass
 

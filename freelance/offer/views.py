@@ -5,10 +5,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from .forms import CreateOfferForm
-from .models import OfferModel
 
 
-# Create your views here.
 @login_required
 def cretae_offer(request: HttpRequest, contract_id: int) -> HttpResponse:
     """

@@ -5,7 +5,6 @@ from users.models import UserModel
 from .models import CategoryModel, ContractModel
 
 
-# Create your tests here.
 class TestContractCreateView(TestCase):
     """
     Test contract create view

@@ -2,8 +2,6 @@ from django.db import models
 from django.urls import reverse
 from users.models import UserModel
 
-# Create your models here.
-
 
 class CategoryModel(models.Model):
     """
