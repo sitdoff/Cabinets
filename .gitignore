@@ -21,9 +21,7 @@ todo.txt
 .env
 .prettierrc.toml
 .pylintrc.bak
-migrations/
+migrations/*
 /startbootstrap*
-freelance/contracts/migrations
-freelance/users/migrations
 freelance/media/
 freelance/db.sqlite3.bak
