@@ -23,5 +23,4 @@ todo.txt
 .pylintrc.bak
 migrations/*
 /startbootstrap*
-freelance/media/
 freelance/db.sqlite3.bak
