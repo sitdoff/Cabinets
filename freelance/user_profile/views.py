@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -16,17 +17,19 @@ def profile(request: HttpRequest, user_id=None):
     return render(request, "profile/profile.html", context={"profile": profile})
 
 
+@login_required
 def customer_office(request: HttpRequest) -> HttpResponse:
     profile = CustomerProfileModel.objects.select_related().get(user=request.user.pk)
     return render(request, "profile/customer.html", context={"profile": profile})
 
 
+@login_required
 def performer_office(request: HttpRequest) -> HttpResponse:
     profile = PerformerProfileModel.objects.select_related().get(user=request.user.pk)
     return render(request, "profile/performer.html", context={"profile": profile})
 
 
-class ProfileEdit(UpdateView):
+class ProfileEdit(LoginRequiredMixin, UpdateView):
     model = UserProfileModel
     template_name = "profile/profile_edit.html"
     fields = ("name", "information", "photo", "contact")
