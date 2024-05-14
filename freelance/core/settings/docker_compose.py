@@ -10,3 +10,13 @@ if DEBUG:
 
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
+# CACHE settings
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "cache",
+        "TIMEOUT": 60,
+    }
+}
+CACHE_TIMEOUT = CACHES["default"]["TIMEOUT"]

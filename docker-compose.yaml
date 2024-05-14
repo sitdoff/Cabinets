@@ -6,6 +6,10 @@ services:
             - POSTGRES_DB=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
+
+    cache:
+        image: memcached:1.6-alpine3.19
+
     web:
         build: .
         entrypoint: ./entrypoint.sh python freelance/manage.py runserver 0.0.0.0:8000
@@ -18,3 +22,4 @@ services:
             - POSTGRES_PASSWORD=postgres
         depends_on:
             - db
+            - cache
