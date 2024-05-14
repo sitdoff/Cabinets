@@ -26,3 +26,4 @@ todo.txt
 !**/migrations/__init__.py
 /startbootstrap*
 freelance/db.sqlite3.bak
+freelance/cache
