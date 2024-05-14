@@ -1,4 +1,4 @@
-from core.settings.settings import *
+from core.settings.base import *
 
 # For django_gebug_toolbar
 INTERNAL_IPS = ["127.0.0.1"]
