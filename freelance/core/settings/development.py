@@ -15,3 +15,5 @@ CACHES = {
         "TIMEOUT": 60,
     },
 }
+
+CACHE_TIMEOUT = CACHES["default"]["TIMEOUT"]
