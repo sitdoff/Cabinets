@@ -12,6 +12,7 @@ services:
         ports:
             - "8000:8000"
         environment:
+            - DJANGO_SETTINGS_MODULE=core.settings.docker_compose
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
