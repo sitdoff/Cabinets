@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from .custom_cahe import cache_user_profile
+from .custom_cache import cache_user_profile
 from .models import CustomerProfileModel, PerformerProfileModel, UserProfileModel
 
 
