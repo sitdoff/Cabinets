@@ -5,6 +5,10 @@ from django.views.decorators.cache import cache_page
 
 
 def cache_user_profile(timeout):
+    """
+    Used to ensure that each user has a unique cache profile.
+    """
+
     def decorator(view):
         @wraps(view)
         def _wrapped_view(request, *args, **kwargs):
