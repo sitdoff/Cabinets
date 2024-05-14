@@ -112,7 +112,7 @@ python3 freelance/manage.py loaddata demo_data.json
 6. Запустить проект используя встроенный в Django сервер.
 
 ```bash
-python3 freelance/manage.py runserver --settings=core.settings.development
+python3 freelance/manage.py runserver
 ```
 
 Проект будет доступен по адресу http://localhost:8000/
