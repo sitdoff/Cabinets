@@ -26,6 +26,13 @@ class ContractDetailView(DetailView):
     template_name = "contracts/contract_detail.html"
     context_object_name = "contract"
 
+    def get_queryset(self):
+        """
+        Join customer to profile object
+        """
+        queryset = super().get_queryset().select_related("customer")
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
