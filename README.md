@@ -16,6 +16,7 @@
 -   psycopg2-binary: 2.9.9
 -   environs: 11.0.0
 -   pillow: 10.3.0
+-   memcache: 4.0.0 (только при запуске с использованием Docker Compose)
 
 ## Данные для демонстрации
 
